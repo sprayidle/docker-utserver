@@ -35,6 +35,16 @@ VOLUME /config
 # Downloads directory
 VOLUME /downloads
 
+ADD utserver.conf /tmp/utserver.conf
+RUN mv -n /tmp/utserver.conf /config/utserver.conf
+
+ADD webui.zip /tmp/webui.zip
+RUN mv -n /tmp/webui.zip /config/webui.zip
+RUN rm /opt/utorrent/webui.zip
+RUN ln -s /config/webui.zip /opt/utorrent/webui.zip
+
+RUN chown -R nobody:users /opt/utorrent
+
 # Add uTorrent to runit
 RUN mkdir /etc/service/utorrent
 ADD utorrent.sh /etc/service/utorrent/run
