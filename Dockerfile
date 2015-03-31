@@ -40,7 +40,7 @@ RUN mv -n /tmp/utserver.conf /config/utserver.conf
 
 ADD webui.zip /tmp/webui.zip
 RUN mv -n /tmp/webui.zip /config/webui.zip
-RUN ln -s /config/webui.zip /opt/utorrent/webui.zip
+# RUN ln -s /config/webui.zip /opt/utorrent/webui.zip
 
 RUN chown -R nobody:users /opt/utorrent
 
