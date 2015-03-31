@@ -40,9 +40,10 @@ RUN mv -n /tmp/utserver.conf /config/utserver.conf
 
 ADD webui.zip /tmp/webui.zip
 RUN mv -n /tmp/webui.zip /config/webui.zip
-# RUN ln -s /config/webui.zip /opt/utorrent/webui.zip
+RUN rm /opt/utorrent-server/webui.zip
+RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
 
-RUN chown -R nobody:users /opt/utorrent
+RUN chown -R nobody:users /opt/utorrent-server
 
 # Add uTorrent to runit
 RUN mkdir /etc/service/utorrent
