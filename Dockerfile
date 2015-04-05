@@ -35,13 +35,13 @@ VOLUME /config
 # Downloads directory
 VOLUME /downloads
 
-ADD utserver.conf /tmp/utserver.conf
-RUN mv -n /tmp/utserver.conf /config/utserver.conf
+# ADD utserver.conf /tmp/utserver.conf
+# RUN mv -n /tmp/utserver.conf /config/utserver.conf
 
-ADD webui.zip /tmp/webui.zip
-RUN mv -n /tmp/webui.zip /config/webui.zip
-RUN rm /opt/utorrent-server/webui.zip
-RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
+# ADD webui.zip /tmp/webui.zip
+# RUN mv -n /tmp/webui.zip /config/webui.zip
+# RUN rm /opt/utorrent-server/webui.zip
+# RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
 
 RUN chown -R nobody:users /opt/utorrent-server
 
@@ -50,4 +50,4 @@ RUN mkdir /etc/service/utorrent
 ADD utorrent.sh /etc/service/utorrent/run
 RUN chmod +x /etc/service/utorrent/run
 
-CMD ["/opt/utorrent-server/utserver", "-settingspath", "/config", "-configfile", "/config/utserver.conf", "-daemon"]
+# CMD ["/opt/utorrent-server/utserver", "-settingspath", "/config", "-configfile", "/config/utserver.conf", "-daemon"]
