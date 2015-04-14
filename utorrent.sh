@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec /sbin/setuser nobody /opt/utorrent-server/utserver -configfile /config/utserver.conf -settingspath /config
+exec /sbin/setuser nobody /opt/utorrent-server/utserver -settingspath /config
