@@ -27,7 +27,7 @@ RUN dpkg -i /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb && cd /opt/ && tar xvzf
 EXPOSE 6881
 
 # Expose the web interface
-EXPOSE 8083
+EXPOSE 8080
 
 # Configuration
 VOLUME /config
@@ -50,4 +50,4 @@ RUN mkdir /etc/service/utorrent
 ADD utorrent.sh /etc/service/utorrent/run
 RUN chmod +x /etc/service/utorrent/run
 
-# CMD ["/opt/utorrent-server/utserver", "-settingspath", "/config", "-configfile", "/config/utserver.conf", "-daemon"]
+# CMD ["/opt/utorrent-server/utserver", "-settingspath", "/config", "-daemon"]
