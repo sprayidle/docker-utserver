@@ -35,11 +35,11 @@ VOLUME /config
 VOLUME /downloads
 
 ADD utserver.conf /tmp/utserver.conf
-RUN mv -n /tmp/utserver.conf /config/utserver.conf
+RUN ["/bin/bash", "-c", "mv -n /tmp/utserver.conf /config/utserver.conf"]
 
-RUN cp -n /opt/utorrent-server/webui.zip /config/webui.zip
+RUN ["/bin/bash", "-c", "cp -n /opt/utorrent-server/webui.zip /config/webui.zip"]
 RUN rm /opt/utorrent-server/webui.zip
-RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
+RUN ["/bin/bash", "-c", "ln -s /config/webui.zip /opt/utorrent-server/webui.zip"]
 
 RUN chown -R nobody:users /opt/utorrent-server
 
