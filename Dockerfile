@@ -1,5 +1,4 @@
-FROM phusion/baseimage:0.9.11
-ENV DEBIAN_FRONTEND noninteractive
+FROM phusion/baseimage:0.9.17
 
 # Set correct environment variables
 ENV HOME /root
@@ -18,10 +17,10 @@ chown -R nobody:users /home
 # Disable SSH
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-ADD http://download-new.utorrent.com/endpoint/utserver/os/linux-x64-debian-6-0/track/beta/ /tmp/utorrent.tar.gz
+ADD http://download-new.utorrent.com/endpoint/utserver/os/linux-x64-debian-6-0/track/beta/ /tmp/utserver.tar.gz
 ADD http://launchpadlibrarian.net/103002189/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb /tmp/
 
-RUN dpkg -i /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb && cd /opt/ && tar xvzf /tmp/utorrent.tar.gz && ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && rm -f /tmp/utorrent.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
+RUN dpkg -i /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb && cd /opt/ && tar xvzf /tmp/utserver.tar.gz && ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && rm -f /tmp/utserver.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
 
 # Expose the port (you also need to portmap this if you're behind a NAT router)
 EXPOSE 6881
@@ -35,19 +34,16 @@ VOLUME /config
 # Downloads directory
 VOLUME /downloads
 
-# ADD utserver.conf /tmp/utserver.conf
-# RUN mv -n /tmp/utserver.conf /config/utserver.conf
+ADD utserver.conf /tmp/utserver.conf
+RUN mv -n /tmp/utserver.conf /config/utserver.conf
 
-# ADD webui.zip /tmp/webui.zip
-# RUN mv -n /tmp/webui.zip /config/webui.zip
-# RUN rm /opt/utorrent-server/webui.zip
-# RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
+RUN cp -n /opt/utorrent-server/webui.zip /config/webui.zip
+RUN rm /opt/utorrent-server/webui.zip
+RUN ln -s /config/webui.zip /opt/utorrent-server/webui.zip
 
 RUN chown -R nobody:users /opt/utorrent-server
 
 # Add uTorrent to runit
-RUN mkdir /etc/service/utorrent
-ADD utorrent.sh /etc/service/utorrent/run
-RUN chmod +x /etc/service/utorrent/run
-
-# CMD ["/opt/utorrent-server/utserver", "-settingspath", "/config", "-daemon"]
+RUN mkdir /etc/service/utserver
+ADD utserver.sh /etc/service/utserver/run
+RUN chmod +x /etc/service/utserver/run
