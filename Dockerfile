@@ -34,8 +34,6 @@ VOLUME /config
 # Downloads directory
 VOLUME /downloads
 
-RUN chown -R nobody:users /opt/utorrent-server
-
 # Add setup script
 RUN mkdir -p /etc/my_init.d
 ADD setup.sh /etc/my_init.d/setup.sh
