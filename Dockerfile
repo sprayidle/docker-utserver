@@ -35,13 +35,11 @@ VOLUME /config
 VOLUME /downloads
 
 ADD utserver.conf /tmp/utserver.conf
-RUN ["/bin/bash", "-c", "mv -n /tmp/utserver.conf /config/utserver.conf"]
 
-RUN ["/bin/bash", "-c", "cp -n /opt/utorrent-server/webui.zip /config/webui.zip"]
-RUN rm /opt/utorrent-server/webui.zip
-RUN ["/bin/bash", "-c", "ln -s /config/webui.zip /opt/utorrent-server/webui.zip"]
-
-RUN chown -R nobody:users /opt/utorrent-server
+# Add setup scrit
+RUN mkdir -p /etc/my_init.d
+ADD setup.sh /etc/my_init.d/setup.sh
+RUN chmod +x /etc/my_init.d/setup.sh
 
 # Add uTorrent to runit
 RUN mkdir /etc/service/utserver
