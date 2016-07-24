@@ -36,7 +36,7 @@ ADD utserver.conf /tmp/
 EXPOSE $connport
 
 # Expose the web interface
-EXPOSE $port
+EXPOSE $webport
 
 # Configuration
 VOLUME /config
