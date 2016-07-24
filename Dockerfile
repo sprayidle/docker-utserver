@@ -14,6 +14,9 @@ usermod -g 100 nobody && \
 usermod -d /home nobody && \
 chown -R nobody:users /home
 
+ENV webport 8083
+ENV connport 6881
+
 # Disable SSH
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
@@ -34,10 +37,10 @@ cp -n /tmp/utserver.conf /config/utserver.conf \
 rm /tmp/utserver.conf
 
 # Expose the port (you also need to portmap this if you're behind a NAT router)
-EXPOSE 6881
+EXPOSE $connport
 
 # Expose the web interface
-EXPOSE 8083
+EXPOSE $port
 
 # Configuration
 VOLUME /config
