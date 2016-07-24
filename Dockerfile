@@ -20,7 +20,12 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 ADD http://download-new.utorrent.com/endpoint/utserver/os/linux-x64-debian-6-0/track/beta/ /tmp/utserver.tar.gz
 ADD http://launchpadlibrarian.net/103002189/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb /tmp/
 
-RUN dpkg -i /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb && cd /opt/ && tar xvzf /tmp/utserver.tar.gz && ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && rm -f /tmp/utserver.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
+RUN \
+dpkg -i /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb && \
+cd /opt/ && \
+tar xvzf /tmp/utserver.tar.gz && \
+ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && \
+rm -f /tmp/utserver.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
 
 # Expose the port (you also need to portmap this if you're behind a NAT router)
 EXPOSE 6881
