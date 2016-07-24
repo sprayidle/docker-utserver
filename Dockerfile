@@ -27,6 +27,8 @@ tar xvzf /tmp/utserver.tar.gz && \
 ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && \
 rm -f /tmp/utserver.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
 
+ADD utserver.conf /tmp/
+
 # Expose the port (you also need to portmap this if you're behind a NAT router)
 EXPOSE 6881
 
