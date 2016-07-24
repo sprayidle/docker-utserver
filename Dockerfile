@@ -33,7 +33,7 @@ ADD utserver.conf /tmp/
 EXPOSE 6881
 
 # Expose the web interface
-EXPOSE 8080
+EXPOSE 8083
 
 # Configuration
 VOLUME /config
