@@ -30,11 +30,7 @@ tar xvzf /tmp/utserver.tar.gz && \
 ln -s /opt/$(ls /opt/|tail -1) /opt/utorrent-server && \
 rm -f /tmp/utserver.tar.gz /tmp/libssl0.9.8_0.9.8o-7ubuntu3.1_amd64.deb
 
-# Add config file to set port off 8080
 ADD utserver.conf /tmp/
-RUN \
-cp -n /tmp/utserver.conf /config/utserver.conf \
-rm /tmp/utserver.conf
 
 # Expose the port (you also need to portmap this if you're behind a NAT router)
 EXPOSE $connport
