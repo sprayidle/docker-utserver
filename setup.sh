@@ -4,4 +4,3 @@
 cp -n /opt/utorrent-server/webui.zip /config/webui.zip
 rm /opt/utorrent-server/webui.zip
 ln -s /config/webui.zip /opt/utorrent-server/webui.zip
-chown -R nobody:users /opt/utorrent-server
